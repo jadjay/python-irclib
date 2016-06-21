@@ -795,7 +795,7 @@ class ServerConnection(Connection):
                 print "TO SERVER:", string
         except socket.error, x:
             # Ouch!
-            self.disconnect(u'Connection reset by peer.')
+            self.disconnect("Connection reset by peer.")
 
     def squit(self, server, comment=""):
         """Send an SQUIT command."""
