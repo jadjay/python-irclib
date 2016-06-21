@@ -763,12 +763,12 @@ class ServerConnection(Connection):
     def privmsg(self, target, text):
         """Send a PRIVMSG command."""
         # Should limit len(text) here!
-        self.send_raw("PRIVMSG %s :%s" % (target, text))
+        self.send_raw(u'PRIVMSG %s :%s' % (target, text))
 
     def privmsg_many(self, targets, text):
         """Send a PRIVMSG command to multiple targets."""
         # Should limit len(text) here!
-        self.send_raw("PRIVMSG %s :%s" % (",".join(targets), text))
+        self.send_raw(u'PRIVMSG %s :%s' % (','.join(targets), text))
 
     def quit(self, message=""):
         """Send a QUIT command."""
@@ -782,17 +782,17 @@ class ServerConnection(Connection):
         The string will be padded with appropriate CR LF.
         """
         if self.socket is None:
-            raise ServerNotConnectedError, "Not connected."
+            raise ServerNotConnectedError, u'Not connected.'
         try:
             if self.ssl:
-                self.ssl.write(string + "\r\n")
+                self.ssl.write(string + u'\r\n')
             else:
-                self.socket.send(string + "\r\n")
+                self.socket.send(string + u'\r\n')
             if DEBUG:
-                print "TO SERVER:", string
+                print u'TO SERVER:', string
         except socket.error, x:
             # Ouch!
-            self.disconnect("Connection reset by peer.")
+            self.disconnect(u'Connection reset by peer.')
 
     def squit(self, server, comment=""):
         """Send an SQUIT command."""
