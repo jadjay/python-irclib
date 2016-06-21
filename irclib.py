@@ -763,12 +763,12 @@ class ServerConnection(Connection):
     def privmsg(self, target, text):
         """Send a PRIVMSG command."""
         # Should limit len(text) here!
-        self.send_raw(u'PRIVMSG %s :%s' % (target, text))
+        self.send_raw("PRIVMSG %s :%s" % (target, text))
 
     def privmsg_many(self, targets, text):
         """Send a PRIVMSG command to multiple targets."""
         # Should limit len(text) here!
-        self.send_raw(u'PRIVMSG %s :%s' % (','.join(targets), text))
+        self.send_raw("PRIVMSG %s :%s" % (",".join(targets), text))
 
     def quit(self, message=""):
         """Send a QUIT command."""
