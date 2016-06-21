@@ -780,16 +780,19 @@ class ServerConnection(Connection):
         """Send raw string to the server.
 
         The string will be padded with appropriate CR LF.
+        From here everything need to be encoded in str from utf-8
         """
+        string=string.encode('utf-8')
+
         if self.socket is None:
-            raise ServerNotConnectedError, u'Not connected.'
+            raise ServerNotConnectedError, "Not connected."
         try:
             if self.ssl:
-                self.ssl.write(string + u'\r\n')
+                self.ssl.write(string + "\r\n")
             else:
-                self.socket.send(string + u'\r\n')
+                self.socket.send(string + "\r\n")
             if DEBUG:
-                print u'TO SERVER:', string
+                print "TO SERVER:", string
         except socket.error, x:
             # Ouch!
             self.disconnect(u'Connection reset by peer.')
